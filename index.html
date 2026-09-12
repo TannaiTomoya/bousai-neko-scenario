@@ -9,7 +9,7 @@
       /* =====================================================================
          ねこの時間 LP
          夜（せつぞく）→ 夜明け → 朝（ねむり）へ、スクロールと一緒に背景が変わる。
-         ページ全体がひとつの「ねこの時間」＝90秒。上部 HUD の残り秒数と記録数は
+         ページ全体がひとつの「ねこの時間」＝150秒。上部 HUD の残り秒数と記録数は
          スクロール量から算出する（シナリオの「記録の進み具合で夜から朝へ」と同じ規則）。
          ===================================================================== */
       :root {
@@ -1735,10 +1735,10 @@
     </style>
   </head>
   <body>
-    <!-- 固定 HUD：ページ全体を 90 秒の「ねこの時間」として、スクロール量で残り秒数と記録数が変わる -->
+    <!-- 固定 HUD：ページ全体を 150 秒の「ねこの時間」として、スクロール量で残り秒数と記録数が変わる -->
     <div class="hud" aria-hidden="true">
       <div class="brand"><i class="led"></i>BOUSAI NEKO <span>@ HIRAIZUMI ／ ねこの時間</span></div>
-      <div class="timer">T−<b id="hud-sec">90</b>s</div>
+      <div class="timer">T−<b id="hud-sec">150</b>s</div>
       <div class="rec">REC <i></i><i></i><i></i><i></i> <span id="hud-rec">0</span>/4</div>
       <div class="bar" id="hud-bar"></div>
     </div>
@@ -1748,7 +1748,7 @@
       <canvas id="scene" aria-hidden="true"></canvas>
       <div class="hero-inner">
         <div>
-          <span class="kicker">NEKO NO JIKAN ／ 90 SEC</span>
+          <span class="kicker">NEKO NO JIKAN ／ 150 SEC</span>
           <h1>人の目は、高いところにある。<br /><span>だから町は、猫に頼んだ。</span></h1>
           <p class="tagline">
             少し先の平泉。名前を持つ人格が、少しの間だけ猫の中に入り、人が見ない高さにある<strong>赤いしるし</strong>（消火栓）を記録する。
@@ -1882,17 +1882,17 @@
           <div class="data">
             <div class="head">
               <p class="name">タキザワ<small>TAKIZAWA ／ EAST</small></p>
-              <span class="badge">はいれる</span>
+              <span class="badge">えらべる</span>
             </div>
             <p class="desc">
-              東のなわばりの猫に入る人格。いま、<strong>体を持っている</strong>。プレイヤーが選ぶのはこの人格。90秒だけ、猫の中で一緒に町を見る。
+              東のなわばりの猫に入る人格。いま、<strong>体を持っている</strong>。プレイヤーが選ぶのはこの人格。150秒だけ、猫の中で一緒に町を見る。
             </p>
             <div class="bind" aria-label="人格と体の結びつき">
               <div>
                 <img src="assets/takizawa-face.png" alt="人格 タキザワ" />
                 <small>PERSONA</small>
               </div>
-              <div class="wire"><span>LINK 90s</span></div>
+              <div class="wire"><span>LINK 150s</span></div>
               <div>
                 <img src="assets/takizawa-photo.png" alt="体（ひがしの なわばりの猫）" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'unknown',textContent:'🐾'}))" />
                 <small>BODY</small>
@@ -1951,7 +1951,7 @@
           <div class="data">
             <div class="head">
               <p class="name">シラヤマ<small>SHIRAYAMA ／ WEST</small></p>
-              <span class="badge">ねむりちゅう</span>
+              <span class="badge">まだ いない</span>
             </div>
             <p class="desc">
               平泉のどこかに住む のらねこ。しずかで 落ち着いていて、まちを みまもる たよりになる存在。ねこの体を借りた人格「シラヤマ」が入り、消火栓（赤いしるし）を見つけて記録していく――はずだが、<strong>入る体がまだ見つかっていない。</strong>
@@ -1995,61 +1995,65 @@
       <!-- 3. 一周の流れ -->
       <section id="loop" class="reveal">
         <h2><small>03 ONE LOOP</small>一周の流れ</h2>
-        <p class="lead">プレイヤーは人格を選び、その90秒だけ、猫の中で人格と一緒に町を見る。</p>
+        <p class="lead">プレイヤーは人格を選び、その150秒だけ、猫の中で人格と一緒に町を見る。</p>
+        <p class="note">
+          <strong>2026-09-12 更新（PR #8）</strong>：町民テストで「切断」「からだ」「かりた」「はいれる」「ねむり」が伝わらなかったため、
+          <strong>1周目に見える画面の文は「猫が消火栓を見て回った」だけで読める語に統一</strong>した。人格・体・ねこの時間などの設定語は、このページと 2周目以降にしか出ない分岐にだけ残す。
+        </p>
         <div class="flow">
           <div class="step connect">
             <small>S02 CONNECT</small>
             <strong>接続（猫えらび）</strong>
-            <p>東と西に2つの人格。東のタキザワは体を持っている。西のシラヤマは体を待っている。</p>
-            <p class="say">ねこの時間は、90びょう。にしの ひとは、まだ からだを まっている。</p>
-            <span class="tag">ロック表示のみ追加</span>
+            <p>東と西に2つの人格。東のタキザワは体を持っている。西のシラヤマは体を待っている。画面上は「えらべる」「まだ いない」。</p>
+            <p class="say">1回の みまわりは 150秒ニャ。ねこを えらぶニャ。シラヤマは まだ 見つかっていないニャ。</p>
+            <span class="tag">ロック表示</span>
           </div>
           <div class="step time">
             <small>S03 PATROL</small>
             <strong>ねこの時間（見回り）</strong>
             <p>人格が猫の目で町を見る。壁、タイヤ、看板の足。人の高さでは見えないもの。</p>
-            <p class="say">赤いしるし。きろくに、ひとつ。</p>
-            <span class="tag">文言1行のみ</span>
+            <p class="say">赤いやつが 見つかったニャ</p>
+            <span class="tag">点検トースト1行</span>
             <img class="pose" src="assets/takizawa-walk.png" alt="" aria-hidden="true" />
           </div>
           <div class="step cut">
-            <small>S04 DISCONNECT</small>
-            <strong>切断（リザルト）</strong>
-            <p>90秒で人格は猫から出る。出る直前、猫から借りた3つの感覚で、今日を残す。</p>
-            <p class="say">目（記録）／鼻／足</p>
-            <span class="tag red">今回の実装</span>
+            <small>S04 RESULT</small>
+            <strong>終わり → 結果1 → 結果2</strong>
+            <p>150秒で人格は猫から出る。画面では「みまわり、おわり」。見つけた消火栓／のこってる消火栓／タイムの順に今日を残す。</p>
+            <p class="say">{猫}の みまわり、おわりニャ</p>
+            <span class="tag red">4スライド</span>
           </div>
           <div class="step sleep">
-            <small>S04 → S02 SLEEP</small>
-            <strong>ねむり</strong>
-            <p>猫は眠る。記録だけが残る。朝になると人の町が戻る。</p>
-            <p class="say">もういちど入る／べつの人格へ／もくげきほうこく</p>
+            <small>S04 → S02 RETRY</small>
+            <strong>再挑戦</strong>
+            <p>猫は眠る。記録だけが残る。画面は次の行動だけを聞く。眠っている人格の話は1行の案内に留める。</p>
+            <p class="say">もう一回 挑戦するにゃ。／今日もう帰るにゃ</p>
             <img class="pose" src="assets/takizawa-sleep.png" alt="" aria-hidden="true" />
           </div>
         </div>
 
-        <h3>切断のとき、猫から借りる3つの感覚</h3>
+        <h3>結果で見せる、猫から借りた3つの感覚（画面ではこの語を使わない）</h3>
         <div class="senses">
           <div class="sense">
             <span class="icon">目</span>
-            <strong>記録</strong>
+            <strong>見つけた 消火栓（結果1・上）</strong>
             <span class="what">この体の縄張りで、何を見て、何をまだ見ていないか。</span>
-            <span class="how">進捗バー ＋ しるし一覧（●記録済 ○まだ）＋ 割合で変わる一行</span>
+            <span class="how">進捗バー ＋ 一覧（●見つけた ○まだ）＋ 本数で変わる一行「消火栓を N こ みつけられたニャ」</span>
           </div>
           <div class="sense">
             <span class="icon">鼻</span>
-            <strong>次の方角</strong>
-            <span class="what">まだ見ていないしるしのうち、一番近いものの方角。</span>
-            <span class="how">8方位コンパスに矢印 ＋ 「〜の あとに まわると ちかい」</span>
+            <strong>のこってる 消火栓（結果1・下）</strong>
+            <span class="what">まだ見ていないしるしのうち、一番近いものの方角。位置を覚えてもらう役。</span>
+            <span class="how">8方位コンパス（縮小）＋「つぎは みなみ 20m に あるニャ」。全部見つけたら区画ごと出さない</span>
           </div>
           <div class="sense">
             <span class="icon">足</span>
-            <strong>速さ</strong>
-            <span class="what">この体でどれだけ速く回れたか。前に入ったときより速いか。</span>
-            <span class="how">きょう／まえ の秒数バー ＋ 前回比の一行</span>
+            <strong>タイム（結果2）</strong>
+            <span class="what">この体でどれだけ速く回れたか。前に入ったときより速いか。自己ベストも残す。</span>
+            <span class="how">きょう／まえ の秒数バー ＋ いちばん早い N秒 ＋ 前回比の一行</span>
           </div>
         </div>
-        <p class="note">「体が覚える」のは、猫ではなくプレイヤー。人格は記録を持ち、体の使い方はプレイヤーの手が覚える。</p>
+        <p class="note">「体が覚える」のは、猫ではなくプレイヤー。人格は記録を持ち、体の使い方はプレイヤーの手が覚える。目と鼻は「数」と「場所」に役割を分け、同じことを二度言わない。</p>
       </section>
 
       <!-- 4. 分岐 -->
@@ -2059,63 +2063,53 @@
           ゲーム結果は <code>src/domain/scenario/context.ts</code> で数値と真偽値（合流フラグ）になり、<code>lines.ts</code> がこの表の文を選ぶ。文言の正本は <code>messages.json</code>。数字の絶対値は文に書かず、割合と差分で分岐する。
         </p>
 
-        <h3>4.1 今回の見回り（点検した本数）</h3>
+        <h3>4.1 結果1 ── 見つけた 消火栓（今回の本数）と のこってる 消火栓（場所）</h3>
         <table>
           <thead>
-            <tr><th>状態</th><th>記録（目）</th><th>鼻</th><th>足</th></tr>
+            <tr><th>状態</th><th>見つけた（目）</th><th>のこってる（鼻）</th></tr>
           </thead>
           <tbody>
             <tr>
-              <th>ひとつも見ていない</th>
-              <td>{alias}の 記録は、まだ しろい。</td>
-              <td>いちばん近い赤の方角を指す</td>
-              <td>この からだでは、まだ 走れていない。</td>
+              <th>今日 0本</th>
+              <td>きょうは 見つからなかったニャ</td>
+              <td>コンパス ＋ つぎは {direction} {distance}m に あるニャ<br />＋ その あとは {hop}ニャ（2本目があるとき）</td>
             </tr>
             <tr>
-              <th>一部（半分未満）</th>
-              <td>{alias}で、まだ しらない 赤が {missing}つ。</td>
-              <td>いちばん近い「まだ」と、その前に回るべきしるし</td>
-              <td>さいごの しるしまでの 秒数（前回比）</td>
-            </tr>
-            <tr>
-              <th>半分より多い</th>
-              <td>記録の はんぶんより むこうが、見えた。まだ {missing}つ。</td>
-              <td>同上</td>
+              <th>今日 1本以上（記録は未完）</th>
+              <td>消火栓を {inspected}こ みつけられたニャ<br /><span class="sub">＋ あたらしく 見つけたのは {gained}こニャ（前からの記録がある回だけ）</span></td>
               <td>同上</td>
             </tr>
             <tr>
-              <th>すべて</th>
-              <td>{alias}の 記録は、できた。</td>
-              <td>この なわばりに、しらない においは ない。<br />＋ においは、{sleepingAlias}から。まだ、だれの 記録にも ない。</td>
-              <td>この からだの、いちばん はやい 足。（最速更新時）</td>
+              <th>記録がすべて埋まった</th>
+              <td>ぜんぶ 見つけたニャ！</td>
+              <td>区画ごと非表示（コンパスも出ない）</td>
             </tr>
           </tbody>
         </table>
-        <p class="note">画面の雰囲気（背景の夜→朝）もこの割合で変わる：しろい＝夜、一部＝夜明け前、半分より多い＝明け方、すべて＝朝。このページの背景も同じ規則でスクロールに応じて変わる。</p>
+        <p class="note">画面の雰囲気（背景の夜→朝）は記録の埋まり具合（0／半分未満／半分以上／すべて）で変わる：夜 → 夜明け前 → 明け方 → 朝。このページの背景も同じ規則でスクロールに応じて変わる。</p>
 
         <div class="grid grid-2">
           <div>
-            <h3>4.2 この人格で入った回数（前回との比較）</h3>
+            <h3>4.2 結果2 ── タイム（最後の消火栓までの秒数）</h3>
             <table>
-              <tr><th>初めて入った</th><td>この からだに、はじめて はいった。</td></tr>
-              <tr><th>前より本数が多い</th><td>まえより {diff}つ おおく、しるしを 見た。</td></tr>
-              <tr><th>前より本数が少ない</th><td>まえより {diff}つ すくない。しるしは、にげない。</td></tr>
-              <tr><th>同数・前より速い</th><td>からだが、みちを おぼえた。まえより はやい。</td></tr>
-              <tr><th>同数・同じ（±2秒）</th><td>まえと おなじ 足。</td></tr>
-              <tr><th>同数・前より遅い</th><td>きょうは、まわりみちを した。</td></tr>
-              <tr><th>全部見て、最速</th><td>この からだの、いちばん はやい 足。</td></tr>
+              <tr><th>1本も点検していない</th><td>つぎは 時間内に 見つけるニャ</td></tr>
+              <tr><th>この猫で初めて</th><td>はじめての タイムだニャ。{sec}秒</td></tr>
+              <tr><th>全部点検して、過去最短を2秒以上更新</th><td>自己ベストだニャ！ {sec}秒</td></tr>
+              <tr><th>前回と同じ本数以上で、2秒以上速い</th><td>前回よりも 早く できたニャ。{sec}秒</td></tr>
+              <tr><th>同じ・遅い・本数が減った</th><td>もっと 早く 走れたニャ。{sec}秒</td></tr>
             </table>
+            <p class="note">前回があるときは「まえ: {prevInspected}こ、{prevSec}秒」と、自己ベスト「いちばん 早い: {bestSec}秒」を小さく添える。自己ベストは全部点検した回だけ更新される。</p>
           </div>
           <div>
-            <h3>4.3 眠っている人格の有無（締めの一行）</h3>
+            <h3>4.3 再挑戦 ── 猫の案内（1行だけ）</h3>
             <table>
-              <tr><th>体を待つ人格がいる</th><td>{sleepingName}は、からだを まっている。まちの ひとが ねこを みつけたら、はいれる。</td></tr>
-              <tr><th>全員に体がある・他が未完</th><td>べつの なわばりの 記録も、まだ しろい。</td></tr>
-              <tr><th>全員に体がある・全部完</th><td>つぎの ねこの時間まで、記録は のこる。</td></tr>
+              <tr><th>体を待つ人格（locked）がいる</th><td>{sleepingAlias}にも ねこが いるニャ。見かけたら おしえてニャ ＋ もくげきほうこくリンク</td></tr>
+              <tr><th>他に選べる猫（unlocked）がいる</th><td>次は {nextCatName}で プレーしてみようニャ（タップで猫えらびへ）</td></tr>
+              <tr><th>どちらもいない</th><td>（案内なし）</td></tr>
             </table>
-            <h3>4.4 記録が完成したとき</h3>
+            <h3>4.4 設定語をどこに残すか</h3>
             <p class="note">
-              東の記録が埋まると、鼻が西を向く。西には人格だけがいて体がない。ここでゲームはプレイヤーに何も要求しない。ただ「まちの ひとが みつけたら」と書いてある。
+              「ねこの時間」「からだ」「人格」「赤いしるし」は、このページと 2周目以降にしか出ない分岐にだけ置く。1周目のリザルトで別の猫の顔・キャッチコピーを見せない（混同の元だったため、シラヤマのカードは削除）。
             </p>
           </div>
         </div>
@@ -2124,118 +2118,92 @@
       <!-- 5. 画面モック -->
       <section id="screens" class="reveal">
         <h2><small>05 SCREENS</small>リザルト画面の見え方</h2>
-        <p class="lead">5スライド（切断 → 目 → 鼻 → 足 → ねむり）。背景は記録の進み具合で夜から朝へ。</p>
+        <p class="lead">4スライド（終わり → 結果1 → 結果2 → 再挑戦）。背景は記録の進み具合で夜から朝へ。旧5スライド（切断／目／鼻／足／ねむり）から統合。</p>
         <div class="devices">
           <div class="device">
             <div class="mock" data-mood="empty">
               <div class="card">
-                <strong>ねこの 記録</strong>
+                <strong>みまわりの 結果</strong>
                 <div class="sub">タキザワ ／ ひがしの なわばり</div>
-                <ul class="steps"><li class="on">切断</li><li>目</li><li>鼻</li><li>足</li><li>ねむり</li></ul>
+                <ul class="steps"><li class="on">終わり</li><li>結果1</li><li>結果2</li><li>再挑戦</li></ul>
               </div>
               <div class="card" style="text-align: center">
                 <div class="portrait"><img src="assets/takizawa-face.png" alt="" /></div>
-                <strong>ねこの時間、おわり。タキザワは、からだから でる。</strong>
-                <div class="sub">でる まえに、かりた 3つの かんかくで、きょうを のこす。</div>
+                <strong>タキザワの みまわり、おわりニャ</strong>
+                <div class="sub">きょうの 結果を 見るニャ</div>
               </div>
               <div class="card"><span class="btn">つぎへ</span></div>
-              <p class="caption">A. 切断 ── ひとつも見ていない（夜）</p>
+              <p class="caption">A. 終わり ── ひとつも見ていない（夜）</p>
             </div>
           </div>
 
           <div class="device">
             <div class="mock" data-mood="low">
               <div class="card">
-                <strong>ねこの 記録</strong>
+                <strong>みまわりの 結果</strong>
                 <div class="sub">タキザワ ／ ひがしの なわばり</div>
-                <ul class="steps"><li class="done">切断</li><li class="on">目</li><li>鼻</li><li>足</li><li>ねむり</li></ul>
+                <ul class="steps"><li class="done">終わり</li><li class="on">結果1</li><li>結果2</li><li>再挑戦</li></ul>
               </div>
               <div class="card">
-                <strong>目</strong>
-                <div class="sub">かりた 目。この なわばりで 見たもの、まだ 見ていないもの。</div>
+                <strong>見つけた 消火栓</strong>
+                <div class="sub">この なわばりの 消火栓</div>
                 <div class="bar"><span style="width: 25%"></span></div>
-                <div class="count"><strong>1</strong> / 4 <span class="sub">（きょう 1つ）</span></div>
+                <div class="count"><strong>1</strong> / 4 <span class="sub">（きょう 1こ）</span></div>
                 <ul class="marks">
                   <li class="known"><span class="dot">●</span>みなみ 50m</li>
                   <li><span class="dot">○</span>みなみにし 70m</li>
                   <li><span class="dot">○</span>きた 80m</li>
                   <li><span class="dot">○</span>きたにし 120m</li>
                 </ul>
-                <p class="line">ひがしの なわばりで、まだ しらない 赤が 3つ。</p>
+                <p class="line">消火栓を 1こ みつけられたニャ</p>
+                <div class="sub" style="margin-top: 10px; border-top: 1px dashed #dbe5f1; padding-top: 8px">のこってる 消火栓</div>
+                <div class="compass" style="transform: scale(0.72); margin: -14px auto -18px"><i style="transform: rotate(225deg)"></i></div>
+                <p class="line">つぎは みなみにし 70m に あるニャ</p>
+                <p class="sub">その あとは きた 80mニャ</p>
               </div>
               <div class="card"><span class="btn">つぎへ</span></div>
-              <p class="caption">B. 目 ── 一部（夜明け前）</p>
-            </div>
-          </div>
-
-          <div class="device">
-            <div class="mock" data-mood="high">
-              <div class="card">
-                <strong>ねこの 記録</strong>
-                <div class="sub">タキザワ ／ ひがしの なわばり</div>
-                <ul class="steps"><li class="done">切断</li><li class="done">目</li><li class="on">鼻</li><li>足</li><li>ねむり</li></ul>
-              </div>
-              <div class="card">
-                <strong>鼻</strong>
-                <div class="sub">かりた 鼻。まだ 見ていない 赤の、いちばん近い 方角。</div>
-                <div class="compass"><i style="transform: rotate(0deg)"></i></div>
-                <p class="line">いちばん近い「まだ」は、きた 80m。</p>
-                <p class="line">きた 80mの あとに まわると、ちかい。</p>
-              </div>
-              <div class="card"><span class="btn">つぎへ</span></div>
-              <p class="caption">C. 鼻 ── 半分より多い（明け方）</p>
+              <p class="caption">B. 結果1 ── 見つけた数 ＋ のこりの場所（夜明け前）</p>
             </div>
           </div>
 
           <div class="device">
             <div class="mock" data-mood="complete">
               <div class="card">
-                <strong>ねこの 記録</strong>
+                <strong>みまわりの 結果</strong>
                 <div class="sub">タキザワ ／ ひがしの なわばり</div>
-                <ul class="steps"><li class="done">切断</li><li class="done">目</li><li class="done">鼻</li><li class="on">足</li><li>ねむり</li></ul>
+                <ul class="steps"><li class="done">終わり</li><li class="done">結果1</li><li class="on">結果2</li><li>再挑戦</li></ul>
               </div>
               <div class="card">
-                <strong>足</strong>
-                <div class="sub">かりた 足。この からだで、どれだけ はやく まわれたか。</div>
+                <strong>タイム</strong>
                 <div class="feet">
                   <div><span>きょう</span><span class="track"><span style="width: 73%"></span></span><span>66秒</span></div>
                   <div><span>まえ</span><span class="track"><span class="prev" style="width: 83%"></span></span><span>75秒</span></div>
                 </div>
-                <p class="line">この からだの、いちばん はやい 足。66秒。</p>
-                <p class="sub">まえ: 4つ、75秒。</p>
+                <p class="sub">いちばん 早い: 66秒</p>
+                <p class="line">自己ベストだニャ！ 66秒</p>
+                <p class="sub">まえ: 4こ、75秒</p>
               </div>
               <div class="card"><span class="btn">つぎへ</span></div>
-              <p class="caption">D. 足 ── すべて・最速（朝）</p>
+              <p class="caption">C. 結果2 ── すべて・自己ベスト（朝）</p>
             </div>
           </div>
-        </div>
 
-        <div class="device" style="max-width: 460px; margin: 18px auto 0">
-          <div class="mock" data-mood="complete">
-            <div class="card">
-              <strong>ねこの 記録</strong>
-              <div class="sub">タキザワ ／ ひがしの なわばり</div>
-              <ul class="steps"><li class="done">切断</li><li class="done">目</li><li class="done">鼻</li><li class="done">足</li><li class="on">ねむり</li></ul>
-            </div>
-            <div class="card" style="text-align: center">
-              <div class="portrait sleep"><img src="assets/takizawa-sleep.png" alt="" /></div>
-              <strong>ねこは ねむる。なにも おぼえていない。</strong>
-              <div class="sub">記録だけが、まちに のこる。</div>
-              <div class="card sleeping-card">
-                <img src="assets/shirayama-sleep.png" alt="" />
-                <div>
-                  <span class="tag grey" style="margin: 0">ねむりちゅう</span> <strong>シラヤマ</strong>
-                  <div class="sub">にしの なわばり ／「そなえれば きっと まもれるニャ」</div>
-                </div>
+          <div class="device">
+            <div class="mock" data-mood="complete">
+              <div class="card">
+                <strong>みまわりの 結果</strong>
+                <div class="sub">タキザワ ／ ひがしの なわばり</div>
+                <ul class="steps"><li class="done">終わり</li><li class="done">結果1</li><li class="done">結果2</li><li class="on">再挑戦</li></ul>
               </div>
-              <p class="sub" style="border-top: 1px dashed #dbe5f1; padding-top: 8px">シラヤマは、からだを まっている。まちの ひとが ねこを みつけたら、はいれる。</p>
+              <div class="card" style="text-align: center">
+                <div class="portrait sleep"><img src="assets/takizawa-sleep.png" alt="" /></div>
+                <strong>もう一回 やるニャ？</strong>
+                <span class="btn" style="display: block; margin-top: 10px">もう一回 挑戦するにゃ。</span>
+                <span class="btn sec" style="display: block">今日もう帰るにゃ</span>
+                <p class="sub" style="border-top: 1px dashed #dbe5f1; padding-top: 8px; margin-top: 10px">にしの なわばりにも ねこが いるニャ。見かけたら おしえてニャ<br /><u>ねこの もくげきほうこく</u></p>
+              </div>
+              <p class="caption">D. 再挑戦 ── 次の行動と、猫の案内1行（シラヤマのカードは出さない）</p>
             </div>
-            <div class="card">
-              <span class="btn">もういちど遊ぶ</span>
-              <span class="btn sec">べつのねこで遊ぶ</span>
-              <span class="btn sec">ねこの もくげきほうこくをする</span>
-            </div>
-            <p class="caption">E. ねむり ── 眠っている人格と、締めの一行</p>
           </div>
         </div>
       </section>
@@ -2247,7 +2215,7 @@
         <div class="unlock">
           <div class="step"><strong><span class="no">1</span>町の人が野良猫を見つける</strong>「ねこの もくげきほうこく」から居場所を報告する。ゲームは何も要求しない。</div>
           <div class="step"><strong><span class="no">2</span>運営がなわばりを調べる</strong>その猫の縄張りを決め、<code>cats.json</code> の <code>status</code> を <code>locked → unlocked</code> にする。</div>
-          <div class="step"><strong><span class="no">3</span>人格が体を得る</strong>シラヤマが目を覚まし、西の記録が白いまま、プレイヤーを待っている。猫えらびで「はいれる」になる。</div>
+          <div class="step"><strong><span class="no">3</span>人格が体を得る</strong>シラヤマが目を覚まし、西の記録が白いまま、プレイヤーを待っている。猫えらびで「えらべる」になる。</div>
         </div>
       </section>
 
@@ -2332,7 +2300,7 @@
         root.style.setProperty('--bg-a', m.a);
         root.style.setProperty('--bg-b', m.b);
         root.style.setProperty('--accent', m.accent);
-        hudSec.textContent = String(Math.round(90 - 90 * t));
+        hudSec.textContent = String(Math.round(150 - 150 * t));
         const rec = Math.min(4, Math.floor(t * 4 + 0.02));
         hudRec.textContent = String(rec);
         hudDots.forEach((d, i) => d.classList.toggle('on', i < rec));
@@ -2355,9 +2323,9 @@
       const typed = document.getElementById('typed');
       const LOG = [
         '> せつぞく … タキザワ → ひがしの なわばり',
-        '> ねこの時間は、90びょう。',
-        '> 赤いしるし。きろくに、ひとつ。',
-        '> にしの ひとは、まだ からだを まっている。'
+        '> ねこの時間は、150秒ニャ。',
+        '> 赤いやつが 見つかったニャ',
+        '> シラヤマは まだ 見つかっていないニャ'
       ];
       (async () => {
         if (reduceMotion) {
